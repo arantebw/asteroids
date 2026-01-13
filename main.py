@@ -2,6 +2,7 @@ import pygame
 from logger import log_state
 
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from player import Player
 
 
 def main():
@@ -18,6 +19,10 @@ def main():
     # New instance of the GUI window
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    x = SCREEN_WIDTH / 2
+    y = SCREEN_HEIGHT / 2
+    player = Player(x, y)
+
     while True:
         # Closes the GUI window
         for event in pygame.event.get():
@@ -25,7 +30,11 @@ def main():
                 return
 
         log_state()
+
         screen.fill("black")
+
+        player.draw(screen)
+
         pygame.display.flip()  # refreshes the screen
 
         dt = clock.tick(60) / 1000  # updates delta time
